@@ -1,6 +1,4 @@
-package com.readboy.util;
-
-import java.io.InputStream;
+package com.readboy.magicbook.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -10,23 +8,25 @@ import android.net.NetworkInfo;
 import android.net.NetworkInfo.State;
 import android.util.Log;
 
+import java.io.InputStream;
+
 public class ToolUtil {
 
 	
 	/**
-	 * Ê¹ÓÃÊäÈëÁ÷À´¶ÁÈ¡Í¼Æ¬
+	 * ä½¿ç”¨è¾“å…¥æµæ¥è¯»å–å›¾ç‰‡
 	 * @param context
-	 * @param resId Í¼Æ¬µÄID
-	 * @return Bitmap¶ÔÏó
+	 * @param resId å›¾ç‰‡çš„ID
+	 * @return Bitmapå¯¹è±¡
 	 */
 	public static Bitmap readBitmap(Context context , int resId)
 	{
 		BitmapFactory.Options opt = new BitmapFactory.Options();
 		opt.inPreferredConfig = Bitmap.Config.RGB_565;
 		opt.inPurgeable = true;
-		//»ñÈ¡×ÊÔ´Í¼Æ¬
+		//è·å–èµ„æºå›¾ç‰‡
 		InputStream is = context.getResources().openRawResource(resId);
-		return BitmapFactory.decodeStream(is, null, opt);		
+		return BitmapFactory.decodeStream(is, null, opt);
 	}
 	
 	
@@ -41,19 +41,19 @@ public class ToolUtil {
 	
 	
 	/**
-	 * ÅĞ¶ÏÍøÂçÊÇ·ñÁ¬½Ó
+	 * åˆ¤æ–­ç½‘ç»œæ˜¯å¦è¿æ¥
 	 * @param context 
-	 * @return 0Î´Á¬½Ó£¬ 1ÒÆ¶¯ÍøÂç£¬ 2wifi
+	 * @return 0æœªè¿æ¥ï¼Œ 1ç§»åŠ¨ç½‘ç»œï¼Œ 2wifi
 	 */
-	public static int getNetworkConnectionType(Context context){ 
-		final ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);  
-        State gprs = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();  
+	public static int getNetworkConnectionType(Context context){
+		final ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        State gprs = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState();
         State wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState();
-        if(wifi == State.CONNECTED || wifi == State.CONNECTING){  
+        if(wifi == State.CONNECTED || wifi == State.CONNECTING){
 //        	Toast.makeText(this, "network is open! wifi", Toast.LENGTH_SHORT).show();
         	return 2;
         } 
-        if(gprs == State.CONNECTED || gprs == State.CONNECTING){  
+        if(gprs == State.CONNECTED || gprs == State.CONNECTING){
 //            Toast.makeText(this, "network is open! gprs", Toast.LENGTH_SHORT).show();
             return 1;
         }  
